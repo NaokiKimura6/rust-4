@@ -1,8 +1,21 @@
+/* 
+コンパイラには、[#derive]アトリビュートを用いることで型に対して特定のトレイトの標準的な実装を提供する機能があります。より複雑なことを行わせたい場合には、同名のトレイトを手動で実装することも可能です。
+
+以下はderive可能なトレイトの一覧です。
+
+・型の比較に関連するトレイト: Eq, PartialEq, Ord, PartialOrd
+・Clone：コピーによって&TからTを作成するトレイト
+・Copy：to give a type 'copy semantics' instead of 'move semantics'.
+・Hash：&Tからハッシュ値を計算するためのトレイト
+・Default：空のインスタンスを作成するためのトレイト
+・Debug：{:?}フォーマッタを利用して値をフォーマットするためのトレイト
+ */
+
 // `Centimeters`は比較可能なタプルになる
 #[derive(PartialEq, PartialOrd)]
 struct Centimeters(f64);
 
-// `Inches`はプリント可能なタプルになる
+// `Inches`は{:?}でプリント可能なタプルになる
 #[derive(Debug)]
 struct Inches(i32);
 
@@ -14,7 +27,6 @@ impl Inches {
     }
 }
 
-// `Seconds`には特にアトリビュートを付け加えない。
 struct Seconds(i32);
 
 fn main() {
